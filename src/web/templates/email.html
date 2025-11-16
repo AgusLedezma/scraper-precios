@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Reporte de Precios</title>
+    <style>
+      body{font-family:Arial,Helvetica,sans-serif;color:#222}
+      .meta{margin-bottom:12px;font-size:14px}
+      .tag{display:inline-block;padding:2px 6px;border-radius:6px;background:#eef;border:1px solid #ccd;margin-right:6px}
+      table{border-collapse:collapse;width:100%}
+      th,td{border:1px solid #ddd;padding:8px;font-size:14px}
+      th{background:#f3f6fb;text-align:left}
+      .val{font-weight:700}
+      .muted{color:#555}
+    </style>
+  </head>
+  <body>
+    <h2>Reporte de Precios</h2>
+    <div class="meta">
+      <div class="tag">URL: {{ url }}</div>
+      {% if original_len %}<div class="tag">Original: {{ original_len }} chars</div>{% endif %}
+      {% if reduced_len %}<div class="tag">Reducido: {{ reduced_len }} chars</div>{% endif %}
+      {% if model %}<div class="tag">Modelo: {{ model }}</div>{% endif %}
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Valor</th>
+          <th>Moneda</th>
+          <th>Contexto</th>
+          <th>Raw</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in prices %}
+          <tr>
+            <td class="val">{{ '%.2f'|format(p.value if p.value is not string else (p.value|float)) }}</td>
+            <td>{{ p.currency or '-' }}</td>
+            <td class="muted">{{ (p.context or '')[:180] }}</td>
+            <td class="muted">{{ p.raw or '' }}</td>
+          </tr>
+        {% endfor %}
+        {% if prices|length == 0 %}
+          <tr><td colspan="4" class="muted">Sin resultados</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </body>
+</html>

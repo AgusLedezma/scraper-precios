@@ -1,0 +1,8 @@
+body{ background: #f7f9fc; }
+.card{ border-radius: 12px; }
+.price-card{ transition: transform .1s ease-in-out; }
+.price-card:hover{ transform: translateY(-2px); }
+.badge{ font-size: 0.85rem; }
+.code-small{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.85rem; }
+.card-price{ font-weight: 700; font-size: 1.25rem; }
+.context{ color:#495057; }
